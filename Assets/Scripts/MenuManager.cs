@@ -2,12 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class MenuManager : MonoBehaviour
 {
+    public TMPro.TextMeshProUGUI bestScore;
+    public void Start()
+    {
+        SetHighScoreText();
+    }
+
+    private void SetHighScoreText()
+    {
+        bestScore.text = GameManager.instance.GetBestScoreText();
+        
+    }
     public void StartClicked()
     {
         SceneManager.LoadScene(1);
@@ -24,5 +36,10 @@ public class MenuManager : MonoBehaviour
 #endif
         }
 
+    }
+
+    public void NameEntered(string name)
+    {
+        GameManager.instance.SetCurrentName(name);
     }
 }
